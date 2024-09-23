@@ -7,12 +7,12 @@ import {useNavigate} from "react-router-dom";
 import {useTeams} from "@/hooks/useTeams";
 import {QuestManagement} from "@/components/QuestsManagement";
 export default function TeamManagementPage() {
-  //   const navigate = useNavigate();
-  //   const {user} = useAuth();
-  //   console.log(user);
-  //   if (!user || user.role.toString() !== "admin") {
-  //     navigate("/");
-  //   }
+  const navigate = useNavigate();
+  const {user} = useAuth();
+  console.log(user);
+  if (!user || user.role.toString() !== "admin") {
+    navigate("/");
+  }
 
   const {teams} = useTeams();
   return (

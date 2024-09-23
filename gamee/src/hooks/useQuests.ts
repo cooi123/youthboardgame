@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NewQuest, Quest } from "../types/index";
 import { toast } from "react-toastify";
 const base_url = import.meta.env.VITE_BACKENDURL as string
-const QUESTURL = "base_url/quest";
+const QUESTURL = base_url + "/quest";
 
 export function useQuests() {
     const [quests, setQuests] = useState<Quest[]>([]);

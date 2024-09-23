@@ -43,14 +43,15 @@ export default function GameQuests({
                   <p className="text-gray-600">Points: {quest.points}</p>
                 </div>
                 <div className="flex space-x-2">
-                  {editable && quest.done ? (
+                  {editable && quest.done && (
                     <button
                       className="px-4 py-2 bg-blue-500 text-white rounded"
                       onClick={() => completeQuest && completeQuest(quest.id)}
                     >
                       Not Completed
                     </button>
-                  ) : (
+                  )}
+                  {editable && !quest.done && (
                     <button
                       className="px-4 py-2 bg-blue-500 text-white rounded"
                       onClick={() =>

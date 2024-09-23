@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Territory, TeamColor, teamColorToId } from "@/types/index";
 import { toast } from "react-toastify";
 
-
-const MAPURL = 'http://192.168.50.7:3000/map';
+const base_url = import.meta.env.VITE_BACKENDURL as string
+const MAPURL = base_url + '/map';
 
 
 export function useMap() {

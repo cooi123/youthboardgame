@@ -1,7 +1,5 @@
-import {Button} from "@nextui-org/button";
-import {Kbd} from "@nextui-org/kbd";
 import {Link} from "@nextui-org/link";
-import {Input} from "@nextui-org/input";
+
 import {
   Navbar as NextUINavbar,
   NavbarBrand,
@@ -14,8 +12,25 @@ import clsx from "clsx";
 import {siteConfig} from "@/config/site";
 
 import {Logo} from "@/components/icons";
+import {Avatar, AvatarGroup, AvatarIcon} from "@nextui-org/avatar";
+import {useAuth} from "@/hooks/useAuth";
 
+const teamsLogo = {
+  1: "/TeamRed.svg",
+  2: "/TeamBlue.svg",
+  3: "/TeamGreen.svg",
+  4: "/TeamYellow.svg",
+  5: "/TeamPurple.svg",
+  6: "/TeamOrange.svg",
+  7: "/TeamLightBlue.svg",
+};
 export const Navbar = () => {
+  const {user} = useAuth();
+  const logo =
+    user?.id !== undefined
+      ? teamsLogo[user.id]
+      : "https://i.pravatar.cc/150?u=a042581f4e29026024d";
+
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -29,7 +44,7 @@ export const Navbar = () => {
             <p className="font-bold text-inherit">Youth Camp 2024</p>
           </Link>
         </NavbarBrand>
-        <div className="hidden lg:flex gap-4 justify-start ml-2">
+        <div className="lg:flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <Link
@@ -44,6 +59,23 @@ export const Navbar = () => {
               </Link>
             </NavbarItem>
           ))}
+          {user?.role.toString() === "admin" && (
+            <NavbarItem>
+              <Link
+                className={clsx(
+                  linkStyles({color: "foreground"}),
+                  "data-[active=true]:text-primary data-[active=true]:font-medium"
+                )}
+                color="foreground"
+                href="/admin/manage"
+              >
+                Management
+              </Link>
+            </NavbarItem>
+          )}
+        </div>
+        <div className=" gap-4 justify-end items-center">
+          <Avatar src={logo} />
         </div>
       </NavbarContent>
     </NextUINavbar>

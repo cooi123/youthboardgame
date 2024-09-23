@@ -1,9 +1,9 @@
 import { useCallback, useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { LoginUser, RegisterUser, useUser } from './useUser'
-
-const AUTHURL = 'http://192.168.50.7:3000/auth';
-const UPDATEUSERURL = 'http://192.168.50.7:3000/user';
+const BACKENDURL = import.meta.env.VITE_BACKENDURL as string;
+const AUTHURL = BACKENDURL + '/auth';
+const UPDATEUSERURL = BACKENDURL + '/user';
 export const useAuth = () => {
     const { user, addUser, removeUser, setUser } = useUser();
     const { getItem } = useLocalStorage();

@@ -12,14 +12,17 @@ import {
   useDisclosure,
 } from "@nextui-org/modal";
 import {useItem} from "@/hooks/useItem";
+import {useAuth} from "@/hooks/useAuth";
 interface CartItem {
   item: Item;
   quantity: number;
 }
 
 export default function GameItems() {
+  const {user} = useAuth();
+
   const {items: shopItems} = useItem();
-  const [userBalance, setUserBalance] = useState(200);
+  const [userBalance, setUserBalance] = useState(user?.points || 0);
   const [cart, setCart] = useState<CartItem[]>([]);
 
   const handleBuyItem = (item: Item) => {
