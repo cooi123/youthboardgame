@@ -17,39 +17,22 @@ export class UserDto {
     name: string;
 
     @ApiProperty({
-        description: 'The email of the user',
-        example: 'johndoe@email.com',
-    })
-    @IsEmail()
-    email: string;
-
-    @ApiProperty({
         description: 'The password of the user',
         example: 'password123',
     })
     @IsNotEmpty()
     password: string;
 
+    role: string;
 
-    @ApiProperty({
-        description: 'The streak of the user',
-        example: 0,
-    })
-    morningRoutineStreak: number
+    points: number;
 
-    @ApiProperty({
-        description: 'The evening streak of the user',
-        example: 0,
-    })
-    eveningRoutineStreak: number
+    color: string;
 
-    @ApiProperty({
-        description: 'The focus session streak of the user',
-        example: 0,
-    })
-    focusSessionStreak: number
+    soldier: number;
 
-    friends: UserDto[];
+    shield: number;
+
 }
 
 export class UserRegisterDto {

@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { QuestEntity } from 'src/quest/quest.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -26,5 +27,8 @@ export class UserEntity {
 
     @Column({ type: 'int', default: 0 })
     shield: number
+
+    @OneToMany(() => QuestEntity, quest => quest.team)
+    quests: QuestEntity[]
 
 }

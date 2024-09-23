@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Body, Param } from '@nestjs/common';
+import { Controller, Get, Patch, Body, Param, Put } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { UserService } from './user.service';
 
@@ -8,7 +8,7 @@ export class UserController {
     constructor(private userService: UserService) { }
 
 
-    @Get()
+    @Get("all")
     getAllUser() {
         return this.userService.getAllUsers()
     }
@@ -37,5 +37,48 @@ export class UserController {
     getUserById(@Param('id') id: number) {
         return this.userService.getUserById(id)
     }
+
+    @Put("/all")
+    @ApiOperation({ summary: 'Update all users' })
+    @ApiResponse({ status: 200, description: 'All users updated successfully' })
+    @ApiResponse({ status: 404, description: 'User not found' })
+    @ApiBody({
+        schema: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    id: {
+                        type: 'number',
+                        example: 1,
+                    },
+                    name: {
+                        type: 'string',
+                        example: 'John Doe',
+                    },
+                    points: {
+                        type: 'number',
+                        example: 10,
+                    },
+                    color: {
+                        type: 'string',
+                        example: 'red',
+                    },
+                    soldier: {
+                        type: 'number',
+                        example: 1,
+                    },
+                    shield: {
+                        type: 'number',
+                        example: 1,
+                    },
+                },
+            },
+        },
+    })
+    updateAllUsers(@Body() users) {
+        return this.userService.updateAllUsers(users)
+    }
+
 
 }

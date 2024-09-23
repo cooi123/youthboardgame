@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Territory, TeamColor, teamColorToId } from "@/types/index";
+import { toast } from "react-toastify";
+
 
 const MAPURL = 'http://192.168.50.7:3000/map';
 
@@ -17,13 +19,20 @@ export function useMap() {
         };
 
         const updateTerritory = { ...newTerritory[index], team: team ? teamColorToId[team] : null };
-        const response = await fetch(MAPURL, {
+        const fetching = fetch(MAPURL, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(updateTerritory),
         });
+        toast.promise(fetching, {
+            pending: 'Updating territory...',
+            success: 'Territory updated!',
+            error: 'Failed to update territory',
+        });
+
+        const response = await fetching
         if (response.ok) {
             setMapTerritory(newTerritory);
         } else {
@@ -40,20 +49,27 @@ export function useMap() {
         const teamColor = currentTerritory.team;
         console.log(newTerritory[index]);
         const updateTerritory = { ...newTerritory[index], team: teamColor ? teamColorToId[teamColor] : null, shield: shield };
-        fetch(MAPURL, {
+        const fetching = fetch(MAPURL, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(updateTerritory),
         })
-            .then((response) => {
-                if (response.ok) {
-                    setMapTerritory(newTerritory);
-                } else {
-                    console.error('Failed to update territory');
-                }
-            });
+        toast.promise(fetching, {
+            pending: 'Updating territory...',
+            success: 'Territory updated!',
+            error: 'Failed to update territory',
+        });
+        const response = await fetching
+        if (response.ok) {
+            setMapTerritory(newTerritory);
+        }
+        else {
+            console.error('Failed to update territory');
+        }
+
+
     };
 
     useEffect(() => {

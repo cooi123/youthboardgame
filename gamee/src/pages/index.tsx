@@ -16,10 +16,13 @@ const testTerritory: Territory[] = Array.from({length: 49}, (_, i) => ({
 console.log(testTerritory);
 
 import {useAuth} from "@/hooks/useAuth";
-
+import {toast} from "react-toastify";
 export default function MapPage() {
   const navigate = useNavigate();
   const {user} = useAuth();
+  if (!user) {
+    navigate("/login");
+  }
   const [announcement, setAnnouncement] = useState<Announcement>({
     message: "Welcome to the game",
     day: "1",
@@ -38,13 +41,23 @@ export default function MapPage() {
   }, []);
 
   const updateAnnouncement = async (announcement: Announcement) => {
-    await fetch("http://localhost:3000/announcement", {
+    const fetching = fetch("http://localhost:3000/announcement", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(announcement),
     });
+
+    toast.promise(fetching, {
+      pending: "Updating announcement",
+      success: "Announcement updated",
+      error: "Error updating announcement",
+    });
+    const data = await fetching;
+    if (!data.ok) {
+      return;
+    }
     setAnnouncement(announcement);
   };
   console.log(user);

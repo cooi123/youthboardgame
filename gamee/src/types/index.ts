@@ -23,13 +23,19 @@ export const teamColorsWithTransparency = {
 };
 
 export interface Quest {
+  id: number
+  name: string
   description: string
   done: boolean
+  team: User
+  points: number
 }
 
-export interface TeamQuests {
-  team: TeamColor
-  quests: Quest[]
+export interface NewQuest {
+  name: string
+  description: string
+  points: number
+  team_id: number
 }
 
 export interface Item {
@@ -54,11 +60,14 @@ export const TeamLogo = {
 export const allTeams: TeamColor[] = ["red", "blue", "green", "yellow", "purple", "orange", "lightblue"]
 
 export interface User {
-
+  id?: number
   name: string
   points: number
   color: TeamColor
   role: role
+  soldier: number
+  shield: number
+
 }
 
 export const teamColorToId = {

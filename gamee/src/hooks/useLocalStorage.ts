@@ -3,7 +3,7 @@ import { useState } from 'react';
 export function useLocalStorage() {
     const [value, setValue] = useState<string | null>(null);
 
-    const setItem = async (key: string, value: string) => {
+    const setItem = (key: string, value: string) => {
         try {
             window.localStorage.setItem(key, value);
         } catch (e) {
@@ -11,7 +11,7 @@ export function useLocalStorage() {
         }
     };
 
-    const getItem = async (key: string) => {
+    const getItem = (key: string) => {
         const value = window.localStorage.getItem(key);
         setValue(value);
         return value;

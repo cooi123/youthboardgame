@@ -20,6 +20,10 @@ import { ItemModule } from './item/item.module';
 import { ItemEntity } from './item/item.entity';
 import { ItemService } from './item/item.service';
 import { ItemController } from './item/item.controller';
+import { QuestService } from './quest/quest.service';
+import { QuestModule } from './quest/quest.module';
+import { QuestController } from './quest/quest.controller';
+import { QuestEntity } from './quest/quest.entity';
 @Module({
   imports: [
     UserModule,
@@ -38,7 +42,7 @@ import { ItemController } from './item/item.controller';
         username: configService.get<string>('DB_USERNAME') || 'postgres',
         password: configService.get<string>('DB_PASSWORD') || 'postgres',
         database: configService.get<string>('DB_DATABASE') || 'focusbear',
-        entities: [UserEntity, MapEntity, AnnouncementEntity, ItemEntity],
+        entities: [UserEntity, MapEntity, AnnouncementEntity, ItemEntity, QuestEntity],
         synchronize: true,
         logging: true,
         seeds: [InitSeeder],
@@ -61,8 +65,11 @@ import { ItemController } from './item/item.controller';
     AnnouncementModule,
 
     ItemModule,
+
+    QuestModule,
   ],
-  controllers: [AppController, AuthController, AnnouncementController, ItemController],
-  providers: [AppService, AuthService, AnnouncementService, ItemService],
+  controllers: [AppController, AuthController, AnnouncementController, ItemController, QuestController],
+  providers: [AppService, AuthService, AnnouncementService, ItemService, QuestService],
+  exports: [AuthService, TypeOrmModule]
 })
 export class AppModule { }

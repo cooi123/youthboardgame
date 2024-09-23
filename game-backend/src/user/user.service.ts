@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
-import { UserRegisterDto } from './dtos/user.dto';
+import { UserRegisterDto, UserDto } from './dtos/user.dto';
 import type { FindOptionsWhere } from 'typeorm';
 @Injectable()
 export class UserService {
@@ -38,6 +38,11 @@ export class UserService {
 
     getUserById(id: number) {
         return this.userRepository.findOne({ where: { id } });
+    }
+
+    async updateAllUsers(UserData: UserDto[]) {
+        const userData = await this.userRepository.save(UserData);
+        return userData
     }
 
 

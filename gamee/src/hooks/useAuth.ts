@@ -9,8 +9,10 @@ export const useAuth = () => {
     const { getItem } = useLocalStorage();
 
     const fetchUser = useCallback(async () => {
-        const storedUser = await getItem('user');
+        const storedUser = getItem('user');
+
         if (storedUser) {
+            addUser(JSON.parse(storedUser));
             const updatedUser = await fetch(UPDATEUSERURL + '/' + JSON.parse(storedUser).id);
             if (updatedUser.ok) {
                 const data = await updatedUser.json();
