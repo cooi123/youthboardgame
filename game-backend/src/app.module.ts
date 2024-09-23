@@ -16,7 +16,10 @@ import { AnnouncementController } from './announcement/announcement.controller';
 import { AnnouncementService } from './announcement/announcement.service';
 import { AnnouncementModule } from './announcement/announcement.module';
 import { AnnouncementEntity } from './announcement/announcement.entity';
-
+import { ItemModule } from './item/item.module';
+import { ItemEntity } from './item/item.entity';
+import { ItemService } from './item/item.service';
+import { ItemController } from './item/item.controller';
 @Module({
   imports: [
     UserModule,
@@ -35,7 +38,7 @@ import { AnnouncementEntity } from './announcement/announcement.entity';
         username: configService.get<string>('DB_USERNAME') || 'postgres',
         password: configService.get<string>('DB_PASSWORD') || 'postgres',
         database: configService.get<string>('DB_DATABASE') || 'focusbear',
-        entities: [UserEntity, MapEntity, AnnouncementEntity],
+        entities: [UserEntity, MapEntity, AnnouncementEntity, ItemEntity],
         synchronize: true,
         logging: true,
         seeds: [InitSeeder],
@@ -56,8 +59,10 @@ import { AnnouncementEntity } from './announcement/announcement.entity';
     MapModule,
 
     AnnouncementModule,
+
+    ItemModule,
   ],
-  controllers: [AppController, AuthController, AnnouncementController],
-  providers: [AppService, AuthService, AnnouncementService],
+  controllers: [AppController, AuthController, AnnouncementController, ItemController],
+  providers: [AppService, AuthService, AnnouncementService, ItemService],
 })
 export class AppModule { }

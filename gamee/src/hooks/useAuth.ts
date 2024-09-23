@@ -2,8 +2,8 @@ import { useCallback, useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { LoginUser, RegisterUser, useUser } from './useUser'
 
-const AUTHURL = 'http://localhost:3000/auth';
-
+const AUTHURL = 'http://192.168.50.7:3000/auth';
+const UPDATEUSERURL = 'http://192.168.50.7:3000/user';
 export const useAuth = () => {
     const { user, addUser, removeUser, setUser } = useUser();
     const { getItem } = useLocalStorage();
@@ -11,7 +11,12 @@ export const useAuth = () => {
     const fetchUser = useCallback(async () => {
         const storedUser = await getItem('user');
         if (storedUser) {
-            addUser(JSON.parse(storedUser));
+            const updatedUser = await fetch(UPDATEUSERURL + '/' + JSON.parse(storedUser).id);
+            if (updatedUser.ok) {
+                const data = await updatedUser.json();
+                addUser(data);
+            }
+
         }
     }, [addUser, getItem]); // Only re-run if `addUser` or `getItem` changes
 

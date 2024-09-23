@@ -74,3 +74,10 @@ export const teamColorToId = {
 export type role = "player" | "admin"
 
 export type Announcement = { message: string; day: string };
+
+export interface Item {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+}

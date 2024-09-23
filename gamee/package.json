@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "lint": "eslint -c .eslintrc.json ./src/**/**/*.{ts,tsx} --fix",
     "preview": "vite preview"
@@ -21,6 +21,7 @@
     "@nextui-org/snippet": "2.0.43",
     "@nextui-org/switch": "2.0.34",
     "@nextui-org/system": "2.2.6",
+    "@nextui-org/table": "^2.0.40",
     "@nextui-org/theme": "2.2.11",
     "@react-aria/visually-hidden": "3.8.12",
     "clsx": "2.1.1",

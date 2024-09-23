@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Territory, TeamColor, teamColorToId } from "@/types/index";
 
-const MAPURL = 'http://localhost:3000/map';
+const MAPURL = 'http://192.168.50.7:3000/map';
 
 
 export function useMap() {

@@ -10,6 +10,7 @@ import MapPage from "./pages/map";
 import {AuthContext} from "./context/AuthContext";
 import {useState} from "react";
 import {BaseUser} from "./hooks/useUser";
+import TeamManagementPage from "./pages/TeamManagement";
 function App() {
   const [user, setUser] = useState<BaseUser | null>(null);
 
@@ -23,6 +24,7 @@ function App() {
         <Route element={<AboutPage />} path="/about" />
         <Route element={<LoginPage />} path="/login" />
         <Route element={<MapPage />} path="/map" />
+        <Route element={<TeamManagementPage />} path="/admin/manage" />
       </Routes>
     </AuthContext.Provider>
   );

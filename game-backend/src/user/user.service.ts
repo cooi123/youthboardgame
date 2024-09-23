@@ -29,6 +29,16 @@ export class UserService {
     }
 
 
+    async updateUserPoints(userId: number, points: number) {
+        const user = await this.userRepository.findOne({ where: { id: userId } });
+        user.points = points;
+        await this.userRepository.save(user);
+        return user;
+    }
+
+    getUserById(id: number) {
+        return this.userRepository.findOne({ where: { id } });
+    }
 
 
 }

@@ -61,7 +61,7 @@ export default function MapPage() {
       <div className="w-full">
         <AnnouncementBar
           announcement={announcement}
-          viewOnly={user?.role.toString() === "player"}
+          viewOnly={user?.role.toString() === "admin" ? false : true}
           setAnnouncement={updateAnnouncement}
         />
       </div>
