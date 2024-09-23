@@ -5,7 +5,7 @@ import {Quest} from "@/types/index";
 import {useState, useEffect} from "react";
 import {RefreshCcw} from "lucide-react";
 import {toast} from "react-toastify";
-const QUESTURL = "http://localhost:3000/quest";
+const QUESTURL = import.meta.env.VITE_BACKENDURL + "/quest";
 export default function QuestPage() {
   const {user} = useAuth();
   console.log(user);

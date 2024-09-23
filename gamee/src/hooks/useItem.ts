@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { Item } from "../types/index";
 import { toast } from "react-toastify";
-const ITEMURL = "http://localhost:3000/item";
+
+
 
 export function useItem() {
+    const BACKENDURL = import.meta.env.VITE_BACKENDURL as string;
+    const ITEMURL = `${BACKENDURL}/item`;
     const [items, setItems] = useState<Item[]>([]);
 
     const fetchItems = async () => {

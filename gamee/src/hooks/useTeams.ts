@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { User } from "../types/index";
 import { toast } from "react-toastify";
-const TEAMURL = "http://localhost:3000/user/all";
+const TEAMURL = import.meta.env.VITE_BACKENDURL as string + "user/all";
 
 export function useTeams() {
     const [teams, setTeams] = useState<User[]>([]);

@@ -89,7 +89,7 @@ export default function GameItems() {
     const parsedOrder = JSON.parse(order);
     const newOrder = [...parsedOrder, ...cart];
     localStorage.setItem("cart", JSON.stringify(newOrder));
-    setCart([]);
+    // setCart([]);
   };
 
   const {isOpen, onOpenChange, onClose, onOpen} = useDisclosure();
@@ -197,11 +197,12 @@ export default function GameItems() {
             {(onClose) => (
               <>
                 <ModalHeader className="flex flex-col gap-1">
-                  Confirm Purchase
+                  Purchase
                 </ModalHeader>
                 <ModalBody>
                   <p>
-                    Please review your cart before confirming your purchase.
+                    Please show this to the team leader to confirm your
+                    purchase.
                   </p>
                   <div className="grid gap-4 py-4">
                     {cart.map((cartItem) => (
@@ -236,17 +237,22 @@ export default function GameItems() {
                   </div>
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
+                  <Button
+                    color="danger"
+                    variant="light"
+                    onPress={onClose}
+                    onClick={() => addToLocalStorage(cart)}
+                  >
                     Close
                   </Button>
-                  <Button
+                  {/* <Button
                     color="primary"
                     onPress={onClose}
                     className="rounded"
                     onClick={() => addToLocalStorage(cart)}
                   >
-                    Send Order
-                  </Button>
+                    Save
+                  </Button> */}
                 </ModalFooter>
               </>
             )}

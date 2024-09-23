@@ -30,7 +30,9 @@ export default function MapPage() {
 
   useEffect(() => {
     const fetchAnnouncement = async () => {
-      const response = await fetch("http://localhost:3000/announcement");
+      const response = await fetch(
+        (import.meta.env.VITE_BACKENDURL as string) + "/announcement"
+      );
       const data = await response.json();
       setAnnouncement(data);
     };
@@ -41,13 +43,16 @@ export default function MapPage() {
   }, []);
 
   const updateAnnouncement = async (announcement: Announcement) => {
-    const fetching = fetch("http://localhost:3000/announcement", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(announcement),
-    });
+    const fetching = fetch(
+      (import.meta.env.VITE_BACKENDURL as string) + "/announcement",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(announcement),
+      }
+    );
 
     toast.promise(fetching, {
       pending: "Updating announcement",
