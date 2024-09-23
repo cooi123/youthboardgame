@@ -12,7 +12,10 @@ import InitSeeder from './database/seeds/init.seed';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MapModule } from './map/map.module';
 import { MapEntity } from './map/map.entity';
-
+import { AnnouncementController } from './announcement/announcement.controller';
+import { AnnouncementService } from './announcement/announcement.service';
+import { AnnouncementModule } from './announcement/announcement.module';
+import { AnnouncementEntity } from './announcement/announcement.entity';
 
 @Module({
   imports: [
@@ -32,7 +35,7 @@ import { MapEntity } from './map/map.entity';
         username: configService.get<string>('DB_USERNAME') || 'postgres',
         password: configService.get<string>('DB_PASSWORD') || 'postgres',
         database: configService.get<string>('DB_DATABASE') || 'focusbear',
-        entities: [UserEntity, MapEntity],
+        entities: [UserEntity, MapEntity, AnnouncementEntity],
         synchronize: true,
         logging: true,
         seeds: [InitSeeder],
@@ -51,8 +54,10 @@ import { MapEntity } from './map/map.entity';
     AuthModule,
 
     MapModule,
+
+    AnnouncementModule,
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService],
+  controllers: [AppController, AuthController, AnnouncementController],
+  providers: [AppService, AuthService, AnnouncementService],
 })
 export class AppModule { }

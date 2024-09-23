@@ -1,11 +1,4 @@
-"use client";
-import {useState} from "react";
-import {
-  allTeams,
-  Territory,
-  teamColorsWithTransparency,
-  TeamColor,
-} from "@/types";
+import {allTeams, teamColorsWithTransparency} from "@/types/index";
 import {
   Dropdown,
   DropdownTrigger,

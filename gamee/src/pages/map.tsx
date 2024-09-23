@@ -1,10 +1,7 @@
 import GameMap from "@/components/GameMap";
-import {Territory, TeamColor} from "@/types/index";
+import {Territory} from "@/types/index";
 import DefaultLayout from "@/layouts/default";
-import AnnouncementBar from "@/components/Announcement";
 import {useNavigate} from "react-router-dom";
-import {PointCard} from "@/components/PointCard";
-import {ItemList} from "@/components/ItemList";
 const testTerritory: Territory[] = Array.from({length: 49}, (_, i) => ({
   gridNumber: i,
   team: null,

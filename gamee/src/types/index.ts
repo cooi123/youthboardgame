@@ -58,7 +58,7 @@ export interface User {
   name: string
   points: number
   color: TeamColor
-  role: "player" | "moderator"
+  role: role
 }
 
 export const teamColorToId = {
@@ -71,3 +71,6 @@ export const teamColorToId = {
   lightblue: 7,
 }
 
+export type role = "player" | "admin"
+
+export type Announcement = { message: string; day: string };
