@@ -14,7 +14,12 @@ import {siteConfig} from "@/config/site";
 import {Logo} from "@/components/icons";
 import {Avatar, AvatarGroup, AvatarIcon} from "@nextui-org/avatar";
 import {useAuth} from "@/hooks/useAuth";
-
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from "@nextui-org/dropdown";
 const teamsLogo = {
   1: "/TeamRed.svg",
   2: "/TeamBlue.svg",
@@ -25,7 +30,7 @@ const teamsLogo = {
   7: "/TeamLightBlue.svg",
 };
 export const Navbar = () => {
-  const {user} = useAuth();
+  const {user, logout} = useAuth();
   const logo =
     user?.id !== undefined
       ? teamsLogo[user.id]
@@ -74,9 +79,20 @@ export const Navbar = () => {
             </NavbarItem>
           )}
         </div>
-        <div className=" gap-4 justify-end items-center">
-          <Avatar src={logo} />
-        </div>
+        {user && (
+          <div className=" gap-4 justify-end items-center">
+            <Dropdown>
+              <DropdownTrigger>
+                <Avatar src={logo} />
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Static Actions">
+                <DropdownItem key="new" onClick={() => logout()}>
+                  Logout
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </div>
+        )}
       </NavbarContent>
     </NextUINavbar>
   );
